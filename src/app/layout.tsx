@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import {Inter} from "next/font/google"
 import {cn} from "@/lib/utils"
 import NavBar from "../components/NavBar"
+import { Toaster } from '@/components/ui/Toaster'
 
 //This file is created automatically by next.js
 export const metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
       {children}
 
       </div>
+      <Toaster/>
       </body>
     </html>
   )
