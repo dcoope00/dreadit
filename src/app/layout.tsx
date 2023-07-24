@@ -4,10 +4,10 @@ import {cn} from "@/lib/utils"
 import NavBar from "../components/NavBar"
 import { Toaster } from '@/components/ui/Toaster'
 
-//This file is created automatically by next.js
+//This root layout file is created automatically by next.js and must remain a server component.
 export const metadata = {
   title: 'dreadit',
-  description: 'A Reddit clone built with Next.js and TypeScript.',
+  description: 'A Reddit clone built with React, Next, and TypeScript.',
 }
 
 //imported font 
