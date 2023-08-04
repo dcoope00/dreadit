@@ -13,7 +13,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 
 //this is a client functional component (FC) to be used in the server component SignIn.tsx
-//structuring components this way provides type safety
+//structuring components this way provides type safety and prevents returning undefined
 const UserAuthForm: FC<UserAuthFormProps> = (props) => {
 
     const [isLoading, setIsLoading] = useState(false)
@@ -23,6 +23,7 @@ const UserAuthForm: FC<UserAuthFormProps> = (props) => {
         setIsLoading(true)
 
         try {
+            //client side method for signin with provider
             await signIn("google")
         } catch (error) {
             //to display a toast set the title, description, and variant fields. Variant options are located in Toast.tsx

@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth"
+import { NextAuthOptions, getServerSession } from "next-auth"
 import { db } from "./db"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import GoogleProvider from "next-auth/providers/google";
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {        // this syntax provides typ
     pages: {
         signIn: "/sign-in"
     },
-    //an arra of what OAuth providers are supported
+    //an array of what OAuth providers are supported
     providers: [
         //Google provider takes an object of clientID and clientSecret
         GoogleProvider({
@@ -29,12 +29,13 @@ export const authOptions: NextAuthOptions = {        // this syntax provides typ
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         }),
     ],
-    //callback object is used to control what happens when an action is performed. must be async
+    //callbacks object is used to control what happens when an action is performed. must be async functions
     callbacks: {
         //session is called when a session is checked. token=JWT payload since JWT is used for the session strategy
         async session({ token, session }) {
             //define which values to have access to whenever a function from next-auth is called in any component to get current session
             //need to define a type for next auth(done in /types/next-auth.d.ts)
+            //token attributes come from .node_modules/next-auth/jwt/types.d.ts and /types/next-auth.d.ts
             if (token) {
                 session.user.id = token.id
                 session.user.name = token.name
@@ -78,22 +79,23 @@ export const authOptions: NextAuthOptions = {        // this syntax provides typ
             return {
                 id: dbUser.id,
                 name: dbUser.name,
-                image: dbUser.image,
+                picture: dbUser.image,
                 email: dbUser.email,
                 username: dbUser.username,
 
             }
         },
         //redirect to home page on login
-        redirect(){
+        redirect() {
             return "/"
         }
-    },
-
-
-
+    }
 
 
 }
-
+//exporting this helper for use in NavBar
+export const getAuthSession = () => {
+    const session = getServerSession(authOptions)
+    return session
+}
 

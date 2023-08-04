@@ -5,7 +5,7 @@ import type { JWT } from "next-auth/jwt"
 //here is where next-auth specific types are defined for /auth.ts session callback
 type UserId = string
 
-//defining what the JWT will look like
+//adding more values to the default jwt interface found in .node_modules/next-auth/jwt/types.d.ts
 declare module "next-auth/jwt" {
     interface JWT {
         id: UserId

@@ -14,15 +14,21 @@ export const metadata = {
 const inter = Inter({subsets: ['latin']})
 
 export default function RootLayout({
-  children,
+  children, authModal
 }: {
   children: React.ReactNode
+  //by creating @authModal with the @ naming convention, the folder is receivable in the same level layout file via props
+  //allows for parallel routes
+  authModal: React.ReactNode    
 }) {
   return (
     //cn() is a function in util.ts that takes any number of classNames as args and combines them
     <html lang='en' className={cn('bg-white text-slate-900 antialiased' , inter.className)}>  
       <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
+        {/* @ts-expect-error Server Component */}
         <NavBar />
+     
+        {authModal}
 
       <div className = "container max-w-7xl mx-auto h-full pt-12">
       {children}
