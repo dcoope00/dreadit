@@ -6,10 +6,10 @@
 //(...) matches segments in the root app directory
 
 import CloseModal from "@/components/CloseModal";
-import SignIn from "@/components/SignIn";
+import SignUp from "@/components/SignUp";
 import { FC } from "react";
 
-//this modal component will intercept the sign-in page. On page reload will show the actual sign-in page
+//this modal component will intercept the sign-up page. On page reload will show the actual sign-up page
 interface pageProps{
 
 }
@@ -29,8 +29,8 @@ const page: FC<pageProps> = () => {
                         <CloseModal />
 
                     </div>
-                    {/* rendering the actual sign in component inside the modal */}
-                    <SignIn />
+                    {/* rendering the actual sign up component inside the modal */}
+                    <SignUp />
                 </div>
             </div>
         </div>

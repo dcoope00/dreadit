@@ -1,11 +1,11 @@
 import { buttonVariants } from "@/components/ui/Button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
-import SignIn from "../../../components/SignIn"
 import { ChevronLeft } from "lucide-react"
+import SignUp from "@/components/SignUp"
 
 
-//this component is the overall signin page rendered onClick of the sign-in button.
+//this component is the overall signup page rendered onClick of the sign-up  button.
 const page = () => {
 
     return <div className="absolute inset-0">
@@ -21,7 +21,7 @@ const page = () => {
                 Home
             </Link>
 
-            <SignIn />
+            <SignUp/>
         </div>
     </div>
 }

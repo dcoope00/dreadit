@@ -4,16 +4,16 @@ import UserAuthForm from "./UserAuthForm"
 
 
 //this is a server component and therefore cannot have interactivity such as react hooks, event handlers, or use the custom Button.tsx component
-const SignIn = () =>{
+const SignUp = () =>{
 
     return (
         <div className="container mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
             <div className="flex flex-col space-y-2 text-center">
                 <Icons.logo className = "mx-auto h-10 w-10" />
-                <h1 className = "text-2xl font-semibold tracking-tight">Welcome to Dreadit</h1>
+                <h1 className = "text-2xl font-semibold tracking-tight">Welcome to Dreadit Sign-Up</h1>
 
-                <p className = "text-small m-width-xs mx-auto pt-1">First time here?{' '}
-                <Link href = "/sign-up" className="hover:text-brand text-sm underline underline-offset-4 ">Sign Up</Link>
+                <p className = "text-small m-width-xs mx-auto pt-1">Already a Dreadittor?{' '}
+                <Link href = "/sign-in" className="hover:text-brand text-sm underline underline-offset-4 ">Sign In</Link>
                 </p>
                 <p className = "pb-1">or</p>
                 <UserAuthForm  className = "pb-5"/>
@@ -28,4 +28,4 @@ const SignIn = () =>{
 
 }
 
-export default SignIn
+export default SignUp
