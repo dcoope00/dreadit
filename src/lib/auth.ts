@@ -93,7 +93,7 @@ export const authOptions: NextAuthOptions = {        // this syntax provides typ
 
 
 }
-//exporting this helper for use in NavBar
+//exporting this helper for use in other components
 export const getAuthSession = () => {
     const session = getServerSession(authOptions)
     return session

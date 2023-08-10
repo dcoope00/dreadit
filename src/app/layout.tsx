@@ -3,6 +3,7 @@ import {Inter} from "next/font/google"
 import {cn} from "@/lib/utils"
 import NavBar from "../components/NavBar"
 import { Toaster } from '@/components/ui/Toaster'
+import Providers from '@/components/Providers'
 
 //This root layout file is created automatically by next.js and must remain a server component.
 export const metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
     //cn() is a function in util.ts that takes any number of classNames as args and combines them
     <html lang='en' className={cn('bg-white text-slate-900 antialiased' , inter.className)}>  
       <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
+        <Providers>
         {/* @ts-expect-error Server Component */}
         <NavBar />
      
@@ -35,6 +37,7 @@ export default function RootLayout({
 
       </div>
       <Toaster/>
+      </Providers>
       </body>
     </html>
   )
