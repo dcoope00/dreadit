@@ -14,7 +14,8 @@ interface pageProps{
 
 }
 
-
+  //by creating @authModal with the @ naming convention, the folder is receivable in the same level layout file via props
+  //allows for parallel routes
 const page: FC<pageProps> = () => {
 
     

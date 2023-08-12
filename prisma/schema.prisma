@@ -11,6 +11,11 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum VoteType {
+  UP
+  DOWN
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -30,6 +35,33 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                String         @id @default(cuid())
+  name              String?
+  email             String?        @unique
+  emailVerified     DateTime?
+  createdSubreddits Subreddit[]    @relation("CreatedBy")
+  subscriptions     Subscription[]
+  votes             Vote[]
+
+  username String? @unique
+
+  image       String?
+  accounts    Account[]
+  sessions    Session[]
+  Post        Post[]
+  Comment     Comment[]
+  CommentVote CommentVote[]
+}
+
 model Subreddit {
   id        String   @id @default(cuid())
   name      String   @unique
@@ -38,7 +70,7 @@ model Subreddit {
   posts     Post[]
 
   creatorId   String?
-  Creator     User?          @relation("CreatedBy",fields: [creatorId], references: [id])
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
   subscribers Subscription[]
 
   @@index([name])
@@ -54,18 +86,17 @@ model Subscription {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   Json?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
-  subredditId String
+  id          String    @id @default(cuid())
+  title       String
+  content     Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String
-  comments    Comment[]
-  votes        Vote[]
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
+  comments    Comment[] 
+  votes       Vote[]
 }
 
 model Comment {
@@ -74,25 +105,21 @@ model Comment {
   createdAt DateTime @default(now())
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
 
   replyToId String?
-  replyTo   Comment?      @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  replies   Comment[]     @relation("ReplyTo")
+  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("ReplyTo")
+
   votes     CommentVote[]
   commentId String?
-}
-
-enum VoteType {
-  UP
-  DOWN
 }
 
 model Vote {
   user   User     @relation(fields: [userId], references: [id])
   userId String
-  post   Post     @relation(fields: [postId], references: [id])
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
   type   VoteType
 
@@ -102,36 +129,9 @@ model Vote {
 model CommentVote {
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  comment   Comment  @relation(fields: [commentId], references: [id])
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String
   type      VoteType
 
   @@id([userId, commentId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-   createdSubreddits Subreddit[] @relation("CreatedBy")
-  username      String?   @unique
-
-  image        String?
-  accounts     Account[]
-  sessions     Session[]
-  Post         Post[]
-  Comment      Comment[]
-  CommentVote  CommentVote[]
-  Vote         Vote[]
- 
-  Subscription Subscription[]
 }

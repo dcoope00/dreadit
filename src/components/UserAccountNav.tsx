@@ -10,7 +10,6 @@ import {
     DropdownMenuTrigger,
 } from "./ui/DropdownMenu"
 import Avatar from '@mui/material/Avatar';
-import UserAvatar from "./UserAvatar";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 //this is a functionComponent for the user dropdown menu in NavBar.

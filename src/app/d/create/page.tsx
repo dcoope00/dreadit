@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import {useMutation} from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
-import { CreatSubredditPayload } from "@/lib/validators/subreddit"
+import { CreateSubredditPayload } from "@/lib/validators/subreddit"
 import { toast } from "@/hooks/use-toast"
 
 import useCustomToast from "@/hooks/use-custom-toast"
@@ -30,7 +30,7 @@ const Page = () => {
         //mutation function handles data fetching
         mutationFn: async () => {
             //enforcing type safety on payload from zod validators file /lib/validators/subreddit
-            const payload: CreatSubredditPayload= {
+            const payload: CreateSubredditPayload= {
                 name: input
             }
 

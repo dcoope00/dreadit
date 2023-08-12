@@ -10,5 +10,5 @@ export const SubredditSubscriptionValidator = z.object({
     subreditId: z.string()
 })
 
-export type CreatSubredditPayload = z.infer<typeof SubredditValidator>
+export type CreateSubredditPayload = z.infer<typeof SubredditValidator>
 export type SubscribeToSubredditPayload = z.infer<typeof SubredditSubscriptionValidator>
