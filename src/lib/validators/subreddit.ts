@@ -7,7 +7,7 @@ export const SubredditValidator = z.object({
 })
 //defining a schema
 export const SubredditSubscriptionValidator = z.object({
-    subreditId: z.string()
+    subredditId: z.string()
 })
 
 export type CreateSubredditPayload = z.infer<typeof SubredditValidator>

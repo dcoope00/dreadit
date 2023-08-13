@@ -27,7 +27,7 @@ const Page = () => {
     //useMutation can be destructured to many things found in the docs
 
     const {mutate: createCommunity, isLoading} = useMutation({
-        //mutation function handles data fetching
+        //mutation function handles data fetching. returns promise
         mutationFn: async () => {
             //enforcing type safety on payload from zod validators file /lib/validators/subreddit
             const payload: CreateSubredditPayload= {
