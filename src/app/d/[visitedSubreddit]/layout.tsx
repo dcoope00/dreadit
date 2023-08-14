@@ -4,10 +4,11 @@
 // layout is a reserved nextjs file name and is automatically passed children of type React.ReactNode
 
 import SubscribeLeaveToggle from "@/components/SubscribeLeaveToggle"
-import { Button } from "@/components/ui/Button"
+import { Button, buttonVariants } from "@/components/ui/Button"
 import { getAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { format } from "date-fns"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 
 //this component allows styling of every subreddit
@@ -104,17 +105,23 @@ const Layout = async ({
                                 </div>
                             ) : null}
                             {subreddit.creatorId === session?.user.id ? null : (
-                                         <SubscribeLeaveToggle 
-                                         isSubscribed = {isSubscribed}
-                                         subredditId = {subreddit.id} 
-                                         subredditName = {subreddit.name}/>
+                                <SubscribeLeaveToggle
+                                    isSubscribed={isSubscribed}
+                                    subredditId={subreddit.id}
+                                    subredditName={subreddit.name} />
                             )}
-                    </dl>
+                            <Link
+                                href={`d/${visitedSubreddit}/submit`}
+                                className={buttonVariants({
+                                    variant: "outline",
+                                    className: "w-full mb-6"
+                                })}>Create Post</Link>
+                        </dl>
 
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
         </div >
     )
 
