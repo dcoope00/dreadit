@@ -110,12 +110,13 @@ const Layout = async ({
                                     subredditId={subreddit.id}
                                     subredditName={subreddit.name} />
                             )}
+                            {session?.user ? 
                             <Link
                                 href={`d/${visitedSubreddit}/submit`}
                                 className={buttonVariants({
                                     variant: "outline",
                                     className: "w-full mb-6"
-                                })}>Create Post</Link>
+                                })}>Create Post</Link> : null} 
                         </dl>
 
                     </div>

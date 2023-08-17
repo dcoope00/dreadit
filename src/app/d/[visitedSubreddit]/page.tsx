@@ -3,7 +3,7 @@ import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
 import { getAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { notFound } from "next/navigation"
-import { FC } from "react"
+import PostFeed from "../../../components/PostFeed"
 
 interface PageProps {
     //getting passed d/"visitedSubreddit" as an object
@@ -17,7 +17,7 @@ interface PageProps {
 const page = async ({ params }: PageProps) => {
     //destructuring the visitedSubreddits from the props and use it for data fetching
     const { visitedSubreddit } = params
-    //getting current session to pass into MiniCreatePost
+    //getting current session 
     const session = await getAuthSession()
 
     //getting subreddit user has visited
@@ -25,6 +25,7 @@ const page = async ({ params }: PageProps) => {
       where: { name: visitedSubreddit },
       include: {
         posts: {
+          //joining Post and Subreddit tables
           include: {
             author: true,
             votes: true,
@@ -45,6 +46,7 @@ const page = async ({ params }: PageProps) => {
             {/* the read-only input field/add image to subreddit post button/add link to subreddit post button in a reddit-style layout*/}
             <MiniCreatePost session = {session}/>
             {/* show posts in user feed*/}
+            <PostFeed initialPosts = {subreddit.posts} subredditName={subreddit.name}  />
             
         </>
 

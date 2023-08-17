@@ -42,7 +42,7 @@ const Page = async({params}: PageProps) => {
                     <p className = "ml-2 mt-1 truncate text-md text-gray-500">in d/{params.visitedSubreddit}</p>
                 </div>
             </div>
-
+            {/* when a post is submitted, Editor makes a post request and redirects to subreddit that was posted on */}
             <Editor subredditId = {subreddit.id}/>
             {/* button to submit whats in create post form  */}
             <div className = "w-full flex justify-end">
