@@ -1,6 +1,7 @@
 import type { Session, User } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
+//typescript definition file
 
 //here is where next-auth specific types are defined for /auth.ts session callback
 type UserId = string

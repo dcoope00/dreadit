@@ -1,5 +1,6 @@
 import type {Post, Subreddit, User, Vote, Comment} from "@prisma/client"
 
+//typescript definition file
 //fetching multiple properties of post and joining them together
 //no prisma type for this so declare it here
 

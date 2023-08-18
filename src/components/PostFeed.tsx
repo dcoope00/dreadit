@@ -12,12 +12,11 @@ interface PostFeedProps {
     //could be optional if post is on the main homepage and not a subreddit
     subredditName?: string,
     initialPosts: ExtendedPost[]
-
 }
 
 //getting posts initially, loading more posts as page loads
 //props from d\[visitedSubreddit]\page.tsx
-const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
+const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
     //DOM node reference to last post currently on screen
     const lastPostRef = useRef<HTMLElement>(null)
 
@@ -99,14 +98,24 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
                         //add ref to last post from useIntersection hook
                         <li key={post.id} ref={ref}>
 
-                            <Post subredditName={post.subreddit.name} post = {post} commentAmt = {post.comments.length} />
+                            <Post 
+                            subredditName={post.subreddit.name} 
+                            post = {post} 
+                            commentAmt = {post.comments.length}
+                            votesAmt= {votesAmount}
+                            currentVote={currentVote}/>
                         </li>
                     )
                 }
                 //if post is not last on screen
                 else {
 
-                    return <Post subredditName={post.subreddit.name} post = {post} commentAmt = {post.comments.length} />
+                    return <Post 
+                    subredditName={post.subreddit.name} 
+                    post = {post} 
+                    commentAmt = {post.comments.length}
+                    votesAmt= {votesAmount}
+                    currentVote={currentVote} />
                 }
             })}
 

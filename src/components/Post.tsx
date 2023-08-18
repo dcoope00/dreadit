@@ -3,7 +3,10 @@ import { Post, User, Vote } from "@prisma/client";
 import { MessageSquare } from "lucide-react";
 import { FC, useRef } from "react";
 import EditorOutput from "./EditorOutput";
+import PostVoteClient from "./post-vote/PostVoteClient";
 
+//using the Pick to type PartialVote as only the "type" property from the prisma Vote model
+type PartialVote = Pick<Vote, "type">
 
 interface PostProps {
 
@@ -15,12 +18,14 @@ interface PostProps {
         
     }
     commentAmt: number
+    votesAmt:number
+    currentVote?: PartialVote
 
 
 }
 
 //a component to preview each post. onClick will fetch data for the post and navigate to its page
-const Post: FC<PostProps> = ({ subredditName, post, commentAmt}) => {
+const Post: FC<PostProps> = ({ subredditName, post, commentAmt, votesAmt, currentVote}) => {
     //dynamically track height of post
     const pRef = useRef<HTMLDivElement>(null)
 
@@ -29,6 +34,10 @@ const Post: FC<PostProps> = ({ subredditName, post, commentAmt}) => {
         <div className="rounded-md bg-white shadow">
             <div className="px-6 py-4 flex justify-between">
                 {/* display current votes */}
+                <PostVoteClient 
+                postId = {post.id} 
+                initialVotesAmt={votesAmt} 
+                initialVote={currentVote?.type}/>
 
                 <div className="w-0 flex-1">
                     <div className="max-h-40 mt-1 text-xs text-gray-500">
@@ -71,6 +80,7 @@ const Post: FC<PostProps> = ({ subredditName, post, commentAmt}) => {
                             {/* icon from lucid react */}
                             <MessageSquare className = "h-4 w-4"/>{commentAmt} comments
                 </a>
+               
             </div>
 
         </div>
