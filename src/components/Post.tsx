@@ -54,7 +54,8 @@ const Post: FC<PostProps> = ({ subredditName, post, commentAmt, votesAmt, curren
                         <span className="">Posted by u/{post.author.name}</span>{` `}
                         {/* a function in /lib/utils to calculate how much time as passed since post was created */}
 
-                        {formatTimeToNow(post.createdAt)}
+                        {formatTimeToNow(new Date(post.createdAt))}
+
 
 
                     </div>

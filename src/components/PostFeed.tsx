@@ -1,6 +1,6 @@
 "use client"
 import { ExtendedPost } from "@/types/db"
-import { FC, useRef } from "react"
+import { FC, useEffect, useRef } from "react"
 import { useIntersection } from "@mantine/hooks"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
@@ -16,7 +16,7 @@ interface PostFeedProps {
 
 //getting posts initially, loading more posts as page loads
 //props from d\[visitedSubreddit]\page.tsx
-const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
+const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
     //DOM node reference to last post currently on screen
     const lastPostRef = useRef<HTMLElement>(null)
 
@@ -42,7 +42,8 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
         async ({ pageParam = 1 }) => {
             //define query to api endpoint to get more posts when bottom of page is reached
             //turning subredditName to boolean. if there is a subredditName append it to endpoint, if not append nothing
-            const query = `api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
+            //api defined in \api\posts\route.ts
+            const query = `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
                 (!!subredditName ? `&subredditName=${subredditName}` : "")
 
             const { data } = await axios.get(query)
@@ -56,11 +57,17 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
             pages: [initialPosts],
             pageParams: [1]
         }
-
-
     }
-
     )
+
+      //check if currently intersecting with last post to fetch more posts
+       useEffect(() => {
+    if (entry?.isIntersecting) {
+      fetchNextPage() // Load more posts when the last post comes into view
+    }
+  }, [entry, fetchNextPage])
+
+
     //determine posts to show
     //will be undefined at beginning before data has been fetched. so show initialPosts instead
     //?? checks for null/undefined only
@@ -98,24 +105,24 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
                         //add ref to last post from useIntersection hook
                         <li key={post.id} ref={ref}>
 
-                            <Post 
-                            subredditName={post.subreddit.name} 
-                            post = {post} 
-                            commentAmt = {post.comments.length}
-                            votesAmt= {votesAmount}
-                            currentVote={currentVote}/>
+                            <Post
+                                subredditName={post.subreddit.name}
+                                post={post}
+                                commentAmt={post.comments.length}
+                                votesAmt={votesAmount}
+                                currentVote={currentVote} />
                         </li>
                     )
                 }
                 //if post is not last on screen
                 else {
 
-                    return <Post 
-                    subredditName={post.subreddit.name} 
-                    post = {post} 
-                    commentAmt = {post.comments.length}
-                    votesAmt= {votesAmount}
-                    currentVote={currentVote} />
+                    return <Post
+                        subredditName={post.subreddit.name}
+                        post={post}
+                        commentAmt={post.comments.length}
+                        votesAmt={votesAmount}
+                        currentVote={currentVote} />
                 }
             })}
 
