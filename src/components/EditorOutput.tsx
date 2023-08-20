@@ -1,9 +1,11 @@
+"use client"
+
 import dynamic from "next/dynamic";
 import { FC } from "react";
 import Image from "next/image"
 
 
-//component to render output
+//component to render content of post
 //dynamic is a nextjs option for handling lazy loading. Improves initial loading performance by not importing until it is needed
 //will use nextjs/image for better performance
 const Output = dynamic(

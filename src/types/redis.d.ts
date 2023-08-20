@@ -8,9 +8,9 @@ export type CachedPost = {
     id: string
     title: string
     authorUsername: string
-    //typing content as string since this will saved as json
+    //typing content as string since this will save as json
     content: string
-    currentVote: VoteType | null
+    currentVote: Vote['type'] | null
     createdAt: Date
 
 }
