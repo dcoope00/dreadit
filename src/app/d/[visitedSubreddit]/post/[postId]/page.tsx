@@ -74,7 +74,7 @@ const page = async ({ params }: PageProps) => {
                         }
                     })
                 }}/>
-            </Suspense>
+            </Suspense >
                 {/* rendering post content */}
                 <div className="sm:w-0 w-full flex-1 bg-white p-4 rounded-sm">
                     <p className = "max-h-40 mt-1 truncate text-xs text-gray-500">

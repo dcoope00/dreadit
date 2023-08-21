@@ -3,7 +3,7 @@ import Link from "next/link"
 import {buttonVariants} from "../components/ui/Button"
 import { getAuthSession } from "@/lib/auth"
 import UserAccountNav from "./UserAccountNav"
-import { User } from "next-auth"
+import SearchBar from "./SearchBar"
 const NavBar = async () =>{
     //using getAuthSession from auth.ts to check if session is active or not
    const session = await getAuthSession()
@@ -16,7 +16,7 @@ const NavBar = async () =>{
                     <Icons.logo className = "h-10 w-10 "></Icons.logo>
                     <p className = "hidden text-white text-sm font-medium md:block">Dreadit</p>
                 </Link>
-
+                <SearchBar/>
                 {session?.user ? 
                 (<UserAccountNav user = {session.user} />) :
              /* giving link a className of buttonVariants from the Button class will make the link component look like a button */
