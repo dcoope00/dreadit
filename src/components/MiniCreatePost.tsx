@@ -40,7 +40,7 @@ const MiniCreatePost: FC<MiniCreatePostProps> = ({ session }) => {
                     /> */}
 
                     {/* rendering the green circle indicating online */}
-                    <span className="absolute bottom-0 right-0 rounded-full w-3 h-3 bg-green-500 outline outline-2 outline-white" />
+                    <span className="absolute -right-0 bottom-8 rounded-full w-2.5 h-2.5 bg-green-500 outline outline-2 outline-white" />
 
                 </div>
                 {/* A read only input field for submitting a post on a subreddit. naviagates to post creation page onClick similar to Reddit */}
