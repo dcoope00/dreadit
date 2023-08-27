@@ -182,6 +182,7 @@ Use this space to list resources you find helpful and would like to give credit 
 * [Upstash](https://console.upstash.com/login)
 * [Img Shields](https://shields.io)
 * [Lucide](https://lucide.dev/)
+* [PlanetScale](https://planetscale.com/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
