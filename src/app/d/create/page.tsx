@@ -80,7 +80,7 @@ const Page = () => {
         //navigating to the newly created subreddit.
         //data is the response from successful fetch which returns the subreddit name
         onSuccess: (data) => {
-            router.push(`/r/${data}`)
+            router.push(`/d/${data}`)
         }
 
     })
