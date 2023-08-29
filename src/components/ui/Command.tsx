@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { Dialog, DialogProps } from "@radix-ui/react-dialog"
+import {  DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { DialogContent } from "./Dialog"
+import { Dialog,DialogContent } from "./Dialog"
 
 
 

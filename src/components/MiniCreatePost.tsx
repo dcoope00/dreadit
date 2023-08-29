@@ -1,6 +1,5 @@
 "use client"
-
-import Avatar from "@mui/material/Avatar"
+import Avatar from '@mui/material/Avatar';
 import { Session } from "next-auth"
 import { usePathname, useRouter } from "next/navigation"
 import { FC } from "react"

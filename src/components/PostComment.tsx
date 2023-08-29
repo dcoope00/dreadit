@@ -1,7 +1,7 @@
 "use client"
 import { getAuthSession } from "@/lib/auth";
 import { formatTimeToNow } from "@/lib/utils";
-import { Avatar } from "@mui/material";
+import  Avatar  from "@mui/material/Avatar";
 import { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { FC, useRef, useState } from "react";
