@@ -39,6 +39,7 @@ const EditorOutput: FC<EditorOutputProps> = ({content}) => {
     
     return (
         //using the post.content prop as the data for the dynamically imported Output
+        //@ts-ignore
         <Output 
         data = {content} 
         style = {style} 
